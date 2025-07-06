@@ -2,8 +2,8 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-// import Button from 'react-bootstrap/Button';
+import Col from "react-bootstrap/Col";
+import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Table from "react-bootstrap/Table";
 import { type WowItem } from "./WowItem.interface";
@@ -21,6 +21,7 @@ const Item = ({ item }: { item: WowItem }) => {
 
 export const ItemList = () => {
   const [itemData, setItemData] = useState([])
+  const [pagination, setPagination] = useState(0)
 
   const getItemData = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -38,6 +39,10 @@ export const ItemList = () => {
   useEffect(() => {
     console.log(itemData)
   }, [itemData])
+
+  useEffect(() => {
+    console.log(pagination)
+  }, [pagination])
 
   return (
     <>
@@ -60,13 +65,25 @@ export const ItemList = () => {
             <tbody>
               {
                 itemData ?
-                  itemData.slice(0, 5).map((item: WowItem) => (
+                  itemData.slice(pagination, pagination + 5).map((item: WowItem) => (
                     <Item key={item.item_id} item={item} />
                   ))
                   : null
               }
             </tbody>
           </Table>
+        </Row>
+        <Row>
+          <Col>
+            {
+              pagination > 0 ? <Button onClick={() => setPagination(pagination - 5)}>Previous</Button> : null
+            }
+          </Col>
+          <Col>
+            {
+              itemData.length > 0 ? <Button onClick={() => setPagination(pagination + 5)}>Next</Button> : null
+            }
+          </Col>
         </Row>
       </Container>
     </>
