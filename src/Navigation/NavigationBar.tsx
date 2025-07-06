@@ -8,24 +8,22 @@ export const NavigationBar = () => {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand>
+          <div className='me-3'>
             <NavLink to="/" className='text-decoration-none'>
               Logo Here
             </NavLink>
-          </Navbar.Brand>
+          </div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link >
+              <div className='me-3'>
                 <NavLink to="/" className='text-decoration-none'>
                   Home
                 </NavLink>
-              </Nav.Link>
-              <Nav.Link>
-                <NavLink to="/item-list" className='text-decoration-none'>
-                  Item List
-                </NavLink>
-              </Nav.Link>
+              </div>
+              <NavLink to="/item-list" className='text-decoration-none'>
+                Item List
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
         </Container>
