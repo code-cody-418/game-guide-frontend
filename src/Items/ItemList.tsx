@@ -81,7 +81,7 @@ export const ItemList = () => {
           </Col>
           <Col>
             {
-              itemData.length > 0 ? <Button onClick={() => setPagination(pagination + 5)}>Next</Button> : null
+              itemData?.length > 0 ? <Button onClick={() => setPagination(pagination + 5)}>Next</Button> : null
             }
           </Col>
         </Row>
