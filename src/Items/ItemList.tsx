@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,14 +7,20 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Table from "react-bootstrap/Table";
 import { type WowItem } from "./WowItem.interface";
+import { NavLink } from "react-router";
 
-const Item = ({ item }: { item: WowItem }) => {
+const ItemRow = ({ item }: { item: WowItem }) => {
   return (
     <>
+
       <tr>
         <td>{item.item_id}</td>
-        <td>{item.item_name}</td>
-      </tr>
+        <td>
+          <NavLink to={`/item/${item.item_id}`}>
+            {item.item_name}
+          </NavLink>
+        </td>
+      </tr >
     </>
   )
 }
@@ -35,14 +41,6 @@ export const ItemList = () => {
       console.error(error)
     }
   }
-
-  useEffect(() => {
-    console.log(itemData)
-  }, [itemData])
-
-  useEffect(() => {
-    console.log(pagination)
-  }, [pagination])
 
   return (
     <>
@@ -66,7 +64,7 @@ export const ItemList = () => {
               {
                 itemData ?
                   itemData.slice(pagination, pagination + 5).map((item: WowItem) => (
-                    <Item key={item.item_id} item={item} />
+                    <ItemRow key={item.item_id} item={item} />
                   ))
                   : null
               }
