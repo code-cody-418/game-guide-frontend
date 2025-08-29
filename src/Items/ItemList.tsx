@@ -49,7 +49,8 @@ export const ItemList = () => {
         </tbody>
       </Table>
   } else if (isError) {
-    content = <div>{error.toString()}</div>
+    console.error(error)
+    content = <div>Error. Please try again later.</div>
   }
 
   return (

@@ -16,7 +16,10 @@ export const ItemDetail = () => {
     code: null,
     message: '',
     body: []
-  } } = useGetWowItemQuery(itemId)
+  }, isLoading,
+    isSuccess,
+    isError,
+    error } = useGetWowItemQuery(itemId)
 
   useEffect(() => {
     if (wowItem.body?.[0]) {
@@ -30,12 +33,12 @@ export const ItemDetail = () => {
     }
   }, [item])
 
-  return (
-    <>
-      <Container>
-        <Row>
-          <h1>Item Detail</h1>
-        </Row>
+  let content: React.ReactNode
+  if (isLoading) {
+    content = <div>Loading...</div>
+  } else if (isSuccess && item) {
+    content =
+      <>
         <Row>
           <Col>
             Item Id: {item?.item_id}
@@ -69,6 +72,19 @@ export const ItemDetail = () => {
             Item Level: {item?.item_level}
           </Col>
         </Row>
+      </>
+  } else if (isError) {
+    console.error(error)
+    content = <div>Error. Please try again later.</div>
+  }
+
+  return (
+    <>
+      <Container>
+        <Row>
+          <h1>Item Detail</h1>
+        </Row>
+        {content}
       </Container>
     </>
   )
