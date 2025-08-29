@@ -47,6 +47,28 @@ export const ItemDetail = () => {
             Item Name: {item?.item_name}
           </Col>
         </Row>
+        <Row>
+          <Col>
+            Inventory Type: {item?.inventory_type}
+          </Col>
+          <Col>
+            Purchase Price: {item?.purchase_price}
+          </Col>
+          <Col>
+            Quality: {item?.quality}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            Item Class: {item?.item_class}
+          </Col>
+          <Col>
+            Sell Price: {item?.sell_price}
+          </Col>
+          <Col>
+            Item Level: {item?.item_level}
+          </Col>
+        </Row>
       </Container>
     </>
   )
