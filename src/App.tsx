@@ -1,12 +1,14 @@
+import { Provider } from 'react-redux'
 import './App.css'
-import { Outlet } from 'react-router'
-import { NavigationBar } from './Navigation/NavigationBar'
+import { Navigation } from './Navigation'
+import { store } from './store/store'
 
 export const App = () => {
   return (
     <>
-      <NavigationBar />
-      <Outlet />
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
     </>
   )
 }
