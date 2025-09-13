@@ -8,11 +8,14 @@ import Table from "react-bootstrap/Table";
 import { type WowItemI } from "./WowItem.interface";
 import { NavLink } from "react-router";
 import { useGetWowItemsQuery } from "../api/apiSlice";
+import "./item.css"
 
 export const ItemList = () => {
   const [searchString, setSearchString] = useState("")
   const [pagination, setPagination] = useState(0)
   const [itemLimit] = useState(10)
+  const [sortCol, setSortCol] = useState("item_name")
+  const [sortOrder, setSortOrder] = useState("ASC")
 
   const { data: wowItems = {
     code: null,
@@ -26,7 +29,9 @@ export const ItemList = () => {
   } = useGetWowItemsQuery({
     search: searchString,
     itemLimit: itemLimit,
-    pageOffset: pagination
+    pageOffset: pagination,
+    sortCol,
+    sortOrder
   })
 
   let content: React.ReactNode
@@ -37,9 +42,34 @@ export const ItemList = () => {
       <Table striped>
         <thead>
           <tr>
-            <th>Item ID</th>
-            <th>Item Image</th>
-            <th>Item Name</th>
+            <th>ID</th>
+            <th>Image</th>
+            <th
+              onClick={() => handleColSort("item_name")}
+              className="table-header-sort">
+              Name
+              {
+                sortCol === "item_name" ? <SortArrow sortOrder={sortOrder} /> : null
+              }
+            </th>
+            <th
+              onClick={() => handleColSort("item_level")}
+              className="table-header-sort">
+              Level
+              {
+                sortCol === "item_level" ? <SortArrow sortOrder={sortOrder} /> : null
+              }
+            </th>
+            <th>Quality</th>
+            <th>Subclass</th>
+            <th
+              onClick={() => handleColSort("sell_price")}
+              className="table-header-sort">
+              Sell Price
+              {
+                sortCol === "sell_price" ? <SortArrow sortOrder={sortOrder} /> : null
+              }
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +81,19 @@ export const ItemList = () => {
   } else if (isError) {
     console.error(error)
     content = <div>Error. Please try again later.</div>
+  }
+
+  const handleColSort = (col: string) => {
+    setSortCol(col)
+    setSortOrder(() => {
+      let order = sortOrder
+      if (sortOrder === "ASC") {
+        order = "DESC"
+      } else if (sortOrder === "DESC") {
+        order = "ASC"
+      }
+      return order
+    })
   }
 
   return (
@@ -102,7 +145,27 @@ const ItemRow = ({ item }: { item: WowItemI }) => {
             {item.item_name}
           </NavLink>
         </td>
+        <td>{item.item_level}</td>
+        <td>{item.quality}</td>
+        <td>{item.item_subclass}</td>
+        <td>{item.sell_price}</td>
       </tr >
     </>
   )
+}
+
+const SortArrow = ({ sortOrder }: { sortOrder: string }) => {
+  if (sortOrder === "ASC") {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4" />
+      </svg>
+    )
+  } else if (sortOrder === "DESC") {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fillRule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5" />
+      </svg>
+    )
+  } else return null
 }

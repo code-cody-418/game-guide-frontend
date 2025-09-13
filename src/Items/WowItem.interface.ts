@@ -8,6 +8,8 @@ export interface WowItemsParamsI {
   search: string;
   itemLimit: number;
   pageOffset: number;
+  sortCol: string;
+  sortOrder: string;
 }
 
 export interface WowItemI {
@@ -21,4 +23,5 @@ export interface WowItemI {
   item_class: string;
   sell_price: number;
   item_level: string;
+  item_subclass: string;
 }

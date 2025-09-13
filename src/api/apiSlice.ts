@@ -11,7 +11,7 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getWowItems: builder.query<GameGuideReqI<WowItemI[]>, WowItemsParamsI>({
       query: (params) =>
-        `/wow/get-wow-items/?search=${params.search}&itemLimit=${params.itemLimit}&pageOffset=${params.pageOffset}`,
+        `/wow/get-wow-items/?search=${params.search}&itemLimit=${params.itemLimit}&pageOffset=${params.pageOffset}&sortCol=${params.sortCol}&sortOrder=${params.sortOrder}`,
     }),
     getWowItem: builder.query<GameGuideReqI<WowItemI[]>, string>({
       query: (itemId) => `/wow/get-wow-item/?itemId=${itemId}`,
