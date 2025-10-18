@@ -139,7 +139,7 @@ const ItemRow = ({ item }: { item: WowItemI }) => {
     <>
       <tr>
         <td>{item.item_id}</td>
-        <td><img src={mediaUrl} alt="No Image Available" /></td>
+        <td className="item-list-image-container"><img className="item-list-image" src={mediaUrl} alt="No Image Available" /></td>
         <td>
           <NavLink to={`/item/${item.item_id}`}>
             {item.item_name}
