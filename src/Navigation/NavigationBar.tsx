@@ -21,9 +21,16 @@ export const NavigationBar = () => {
                   Home
                 </NavLink>
               </div>
-              <NavLink to="/item-list" className='text-decoration-none'>
-                Item List
-              </NavLink>
+              <div className='me-3'>
+                <NavLink to="/item-list" className='text-decoration-none'>
+                  Item List
+                </NavLink>
+              </div>
+              <div className='me-3'>
+                <NavLink to="/mount-list" className='text-decoration-none'>
+                  Mount List
+                </NavLink>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Container>

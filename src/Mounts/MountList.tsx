@@ -1,28 +1,27 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { GenericTable } from "../Tables/GenericTable.tsx";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { resetQuery } from "../Tables/genericTableQuerySlice.ts";
-import { useGetWowItemsQuery } from "../api/apiSlice.ts";
 import type { RootState } from "../store/store.ts";
-import type { GenericHeaderI } from "../Tables/WowQuery.interface.ts";
+import { useGetWowMountsQuery } from "../api/apiSlice.ts";
 
-export const ItemList = () => {
+export const MountList = () => {
   const searchString = useSelector((state: RootState) => state.genericTableQuery.search)
   const pagination = useSelector((state: RootState) => state.genericTableQuery.pageOffset)
   const itemLimit = useSelector((state: RootState) => state.genericTableQuery.itemLimit)
   const sortCol = useSelector((state: RootState) => state.genericTableQuery.sortCol)
   const sortOrder = useSelector((state: RootState) => state.genericTableQuery.sortOrder)
-  const validSortCols = ["item_name", "item_level", "sell_price"]
+  const validSortCols = ["mount_name"]
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(resetQuery("item_name"))
+    dispatch(resetQuery("mount_name"))
   }, [dispatch])
 
-  const { data: wowItems = {
+  const { data: wowMounts = {
     code: null,
     message: '',
     body: [],
@@ -31,72 +30,36 @@ export const ItemList = () => {
     isSuccess,
     isError,
     error
-  } = useGetWowItemsQuery({
+  } = useGetWowMountsQuery({
     search: searchString,
     itemLimit: itemLimit,
     pageOffset: pagination,
-    sortCol: validSortCols.includes(sortCol) ? sortCol : "item_name",
+    sortCol: validSortCols.includes(sortCol) ? sortCol : "mount_name",
     sortOrder
   })
 
-  const tableHeaders: Array<GenericHeaderI> = [
+  const tableHeaders = [
     {
       readableHeader: "ID",
       sortCol: "",
       isSortable: false,
-      dataPropertyName: "item_id"
-    },
-    {
-      readableHeader: "Image",
-      sortCol: "",
-      isSortable: false,
-      dataPropertyName: "media_value",
-      rowStyling: "item-list-image-container",
-      isImg: true
+      dataPropertyName: "mount_id"
     },
     {
       readableHeader: "Name",
-      sortCol: "item_name",
-      isSortable: true,
-      dataPropertyName: "item_name",
-      isNav: true,
-      navLink: "/item/",
-      navLinkId: "item_id"
-    },
-    {
-      readableHeader: "Level",
-      sortCol: "item_level",
-      isSortable: true,
-      dataPropertyName: "item_level"
-    },
-    {
-      readableHeader: "Quality",
       sortCol: "",
       isSortable: false,
-      dataPropertyName: "quality"
-    },
-    {
-      readableHeader: "SubClass",
-      sortCol: "",
-      isSortable: false,
-      dataPropertyName: "item_subclass"
-    },
-    {
-      readableHeader: "Sell Price",
-      sortCol: "sell_price",
-      isSortable: true,
-      dataPropertyName: "sell_price"
+      dataPropertyName: "mount_name"
     },
   ]
-
   return (
     <>
       <Container>
         <Row>
-          <h1>Item List Page</h1>
+          <h1>Mount List Page</h1>
         </Row>
         <GenericTable
-          data={wowItems}
+          data={wowMounts}
           isLoading={isLoading}
           isSuccess={isSuccess}
           isError={isError}

@@ -1,15 +1,7 @@
 export interface GameGuideReqI<T> {
   code: number | null;
   message: string;
-  body: T;
-}
-
-export interface WowItemsParamsI {
-  search: string;
-  itemLimit: number;
-  pageOffset: number;
-  sortCol: string;
-  sortOrder: string;
+  body: Array<T>;
 }
 
 export interface WowItemI {
