@@ -49,7 +49,10 @@ export const MountList = () => {
       readableHeader: "Name",
       sortCol: "",
       isSortable: false,
-      dataPropertyName: "mount_name"
+      dataPropertyName: "mount_name",
+      isNav: true,
+      navLink: "/mount/",
+      navLinkId: "mount_id"
     },
   ]
   return (

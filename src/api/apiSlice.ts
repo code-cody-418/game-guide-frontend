@@ -18,9 +18,12 @@ export const apiSlice = createApi({
       query: (params) =>
         `/wow/get-wow-mounts/?search=${params.search}&itemLimit=${params.itemLimit}&pageOffset=${params.pageOffset}&sortCol=${params.sortCol}&sortOrder=${params.sortOrder}`,
     }),
+    getWowMount: builder.query<GameGuideReqI<WowMountI>, string>({
+      query: (mountId) => `/wow/get-wow-mount/?itemId=${mountId}`,
+    }),
   }),
 });
 
 // Note that the exported hooks are auto generated from the endpoints above. Read the RTK Docs for more info
-export const { useGetWowItemsQuery, useGetWowItemQuery, useGetWowMountsQuery } =
+export const { useGetWowItemsQuery, useGetWowItemQuery, useGetWowMountsQuery, useGetWowMountQuery } =
   apiSlice;
