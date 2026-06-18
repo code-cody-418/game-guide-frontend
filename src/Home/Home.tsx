@@ -5,7 +5,8 @@ export const Home = () => {
     <>
       <Container className="vh-100">
 
-        <h1>HomePage</h1>
+        <h1>Welcome to Mystic Archives</h1>
+        <p>A place where you can find lots of video game data and guides.</p>
       </Container>
     </>
   )
