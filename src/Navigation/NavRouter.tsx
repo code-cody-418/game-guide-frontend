@@ -5,6 +5,9 @@ import { ItemDetail } from "../Items/ItemDetail"
 import { ItemList } from "../Items/ItemList.tsx"
 import { MountList } from "../Mounts/MountList.tsx"
 import { MountDetail } from "../Mounts/MountDetail.tsx"
+import { Guides } from "../Guides/Guides.tsx"
+import { News } from "../News/News.tsx"
+import { Databases } from "../Databases/Databases.tsx"
 
 export const NavRouter = () => {
   return (
@@ -17,6 +20,9 @@ export const NavRouter = () => {
             <Route path='/item/:itemId' element={<ItemDetail />} />
             <Route path='/mount-list' element={<MountList />} />
             <Route path='/mount/:mountId' element={<MountDetail />} />
+            <Route path='/guides' element={<Guides />} />
+            <Route path='/databases' element={<Databases />} />
+            <Route path='/news' element={<News />} />
           </Route>
         </Routes>
       </BrowserRouter>

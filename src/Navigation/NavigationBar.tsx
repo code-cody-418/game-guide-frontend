@@ -22,6 +22,21 @@ export const NavigationBar = () => {
                 </NavLink>
               </div>
               <div className='me-3'>
+                <NavLink to="/guides" className='text-decoration-none'>
+                  Guides
+                </NavLink>
+              </div>
+              <div className='me-3'>
+                <NavLink to="/databases" className='text-decoration-none'>
+                  Databases
+                </NavLink>
+              </div>
+              <div className='me-3'>
+                <NavLink to="/news" className='text-decoration-none'>
+                  News
+                </NavLink>
+              </div>
+              <div className='me-3'>
                 <NavLink to="/item-list" className='text-decoration-none'>
                   Item List
                 </NavLink>
