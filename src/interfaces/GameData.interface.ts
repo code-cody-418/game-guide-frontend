@@ -3,3 +3,9 @@ export interface GameGuideI {
   img: string;
   updatedAt: string;
 }
+
+export interface GameDatabaseI {
+  title: string;
+  img: string;
+  updatedAt: string;
+}
