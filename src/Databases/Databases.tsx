@@ -8,9 +8,9 @@ export const Databases = () => {
       <h1>Databases</h1>
 
       <ul>
-        {databaseData.map((database) => (
-          <li>
-            <NavLink to={`${database.title}/database`}>
+        {databaseData.map((database, i) => (
+          <li key={i}>
+            <NavLink to={`/${database.title}/database`}>
               {database.title}
             </NavLink></li>
         ))}

@@ -9,6 +9,7 @@ import { Guides } from "../Guides/Guides.tsx"
 import { News } from "../News/News.tsx"
 import { Databases } from "../Databases/Databases.tsx"
 import { Category } from "../Databases/Category.tsx"
+import { SubCategory } from "../Databases/SubCategory.tsx"
 
 export const NavRouter = () => {
   return (
@@ -24,7 +25,8 @@ export const NavRouter = () => {
             <Route path='/guides' element={<Guides />} />
             <Route path='/databases' element={<Databases />} />
             <Route path='/news' element={<News />} />
-            <Route path='/databases/:game/database' element={<Category />} />
+            <Route path='/:game/database' element={<Category />} />
+            <Route path='/:game/database/:category' element={<SubCategory />} />
           </Route>
         </Routes>
       </BrowserRouter>
